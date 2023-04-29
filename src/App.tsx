@@ -1,23 +1,20 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { ThemeProvider } from 'styled-components'
+import 'react-loading-skeleton/dist/skeleton.css'
+import 'react-toastify/dist/ReactToastify.css'
+
+import { Route, Routes } from 'react-router-dom'
 
 import { Default } from './layouts/Default'
 import { Home } from './pages/Home'
-import { GlobalStyle } from './styles/global'
-import { defaultTheme } from './styles/theme'
+import { Providers } from './providers'
 
 export function App() {
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Default />}>
-            <Route path="/" element={<Home />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-
-      <GlobalStyle />
-    </ThemeProvider>
+    <Providers>
+      <Routes>
+        <Route path="/" element={<Default />}>
+          <Route path="/" element={<Home />} />
+        </Route>
+      </Routes>
+    </Providers>
   )
 }

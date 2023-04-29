@@ -1,18 +1,23 @@
-import { ContentCard, PersonCard } from './styles'
+import { Person } from '../../components/Person'
+import { PostCard } from '../../components/PostCard'
+import { SearchPublicationsInput } from '../../components/SearchPublicationsInput'
+import { useGetUser } from '../../hooks/queries/use-get-user'
+import { PostsContainer } from './styles'
 
 export function Home() {
+  const { data } = useGetUser()
+
   return (
     <>
-      <PersonCard>
-        <img
-          src="https://github.com/cleysonsilvame.png"
-          alt="Imagem do perfil do usuário do github: cleysonsilvame"
-        />
-        <ContentCard>
-          <h2>Cleyson Silva</h2>
-          <p>Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu viverra massa quam dignissim aenean malesuada suscipit. Nunc, volutpat pulvinar vel mass.</p>
-        </ContentCard>
-      </PersonCard>
+      <Person user={data} />
+
+      <SearchPublicationsInput />
+
+      <PostsContainer>
+        <PostCard />
+        <PostCard />
+        <PostCard />
+      </PostsContainer>
     </>
   )
 }
