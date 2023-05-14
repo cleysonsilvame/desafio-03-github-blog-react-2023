@@ -26,3 +26,54 @@ export async function getUser(
 
   return data
 }
+
+export interface Item {
+  id: number
+  number: number
+  title: string
+  created_at: string
+  body: string
+  html_url: string
+  user: {
+    login: string
+  }
+  comments: number
+}
+
+export interface SearchIssuesResponse {
+  total_count: number
+  incomplete_results: boolean
+  items: Item[]
+}
+
+export async function searchIssues(
+  username: string,
+  repo: string,
+  search = '',
+  options?: { signal?: AbortSignal },
+) {
+  const { data } = await api.get<SearchIssuesResponse>('/search/issues', {
+    ...options,
+    params: {
+      q: `${search} repo:${username}/${repo}`,
+    },
+  })
+
+  return data
+}
+
+export async function getIssueByNumber(
+  username: string,
+  repo: string,
+  number: number,
+  options?: { signal?: AbortSignal },
+) {
+  const { data } = await api.get<Item>(
+    `/repos/${username}/${repo}/issues/${number}`,
+    {
+      ...options,
+    },
+  )
+
+  return data
+}

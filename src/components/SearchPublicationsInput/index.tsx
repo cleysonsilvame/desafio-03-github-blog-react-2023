@@ -1,6 +1,6 @@
 import { Header, Input } from './styles'
 
-export function SearchPublicationsInput() {
+export function SearchPublicationsInput({ onChange }: any) {
   return (
     <div>
       <Header>
@@ -8,7 +8,11 @@ export function SearchPublicationsInput() {
         <span>6 publicações</span>
       </Header>
 
-      <Input type="text" placeholder="Buscar conteúdo" />
+      <Input
+        type="text"
+        placeholder="Buscar conteúdo"
+        onChange={(e) => onChange(e.target.value)}
+      />
     </div>
   )
 }
